@@ -8,8 +8,8 @@ def search_files_csv(path):
     return files
 
 
-def list_movies_desc_asc(input_user):
-    path = '../movie_files'
+def list_movies_desc_asc(path):
+    # path = '../movie_files'
     files = search_files_csv(path)
     list_of_dict_movies = []
     list_temporary = []
@@ -24,17 +24,22 @@ def list_movies_desc_asc(input_user):
                     # data = file_name.readline()
                     # list_formatted = [line.strip() for line in data]
                     line_formatted = line.strip().split(',')
-                    dict_movies = {'movieId': line_formatted[0], 'title': line_formatted[1],'genres': line_formatted[2]}
+                    dict_movies = {
+                        'movieId': line_formatted[0],
+                        'title': line_formatted[1],
+                        'genres': line_formatted[2]
+                    }
                     list_of_dict_movies.append(dict_movies)
                     # print(dict_movies)
 
                 print(list_of_dict_movies)
-
+                return list_of_dict_movies
                 # if data is not None:
                 #     pass
-                    # print(data)
+                # print(data)
 
 
 if __name__ == '__main__':
-    input_user = 'Toy Story'
-    list_movies_desc_asc(input_user)
+    # input_user = 'Toy Story'
+    path = '../movie_files'
+    list_movies_desc_asc(path)
