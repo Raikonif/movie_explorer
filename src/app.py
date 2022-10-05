@@ -1,12 +1,11 @@
 import sys
 from helpers.utility_help import get_argument
-from src.searchers.search_sort_movies import search_files_csv
 
-if __name__ == '__main__':
-    get_argument(sys.argv[1])
-    result = search_files_csv('../movie_files')
-    print(result)
-    print('hello world!')
+# if __name__ == '__main__':
+get_argument(sys.argv[1])
+    # result = search_files_csv('../movie_files')
+    # print(result)
+    # print('hello world!')
     
 
 # def validate_comand(list_comands):
