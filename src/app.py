@@ -23,6 +23,9 @@ import argparse
 #   return arguments_dic
 
 #print(MAIN_DICTIONARY["--help"][0])
+from search_sort_movies import search_movie_title_typing, list_movies_desc_asc, search_movie_by_release_dates
+
+
 def is_order_and_by_in_dictionary(dictionary):
   return True if dictionary.get('order') != None and dictionary.get('by') != None else False
 #  return_if_true if condition else condition_if_false
@@ -70,12 +73,16 @@ else:
   if variables.get('title') != None:
     if is_order_and_by_in_dictionary(variables):
       print("ejecutamos serach sort movies by [title] order [desc]")
+      list_movies_desc_asc(variables['order'])
     elif is_release_date_in_dictionary(variables):
       print("llamamos a la funcion title  y le pasamos [release_date]")
+      search_movie_by_release_dates(variables['release_date'])
     elif variables.get('order') != None or variables.get('by') != None:
       print("no se admite order o by")
     else:
       print("solo pelis")
+      search_movie_title_typing(variables['title'])
+
   elif variables.get('genres') != None:
     print("Llamamos a la funcion que obtiene los generos")
   elif variables.get('rating') != None:

@@ -11,16 +11,17 @@ def search_files_csv(path):
     return files
 
 
-def search_and_open_file_if_exist(files):
-    for file in files:
-        concat_dir = path + '/' + file
-        if os.path.exists(concat_dir):
-            with open(concat_dir, 'r', encoding='utf-8') as file_name:
-                reader = csv.reader(file_name)
-        return reader
+# def search_and_open_file_if_exist(files):
+#     for file in files:
+#         concat_dir = path + '/' + file
+#         if os.path.exists(concat_dir):
+#             with open(concat_dir, 'r', encoding='utf-8') as file_name:
+#                 reader = csv.reader(file_name)
+#         return reader
 
 
 def search_movie_title_typing(input_user):
+    path = "../movie_files"
     files = search_files_csv(path)
     # reader = search_and_open_file_if_exist(files)
     for file in files:
@@ -40,6 +41,7 @@ def search_movie_title_typing(input_user):
 
 
 def search_movie_by_release_dates(input_user):
+    path = "../movie_files"
     files = search_files_csv(path)
     for file in files:
         concat_dir = path + '/' + file
@@ -58,8 +60,8 @@ def search_movie_by_release_dates(input_user):
                 return row
 
 
-def list_movies_desc_asc(path, input_user):
-    # path = '../movie_files'
+def list_movies_desc_asc(input_user):
+    path = '../movie_files'
     files = search_files_csv(path)
     list_of_dict_movies = []
     list_sorted = []
@@ -87,9 +89,9 @@ def list_movies_desc_asc(path, input_user):
                         'genres': row_formatted[2]
                     }
                     list_of_dict_movies.append(dict_movie)
-                if input_user == 1:
+                if input_user == 'desc':
                     list_of_dict_movies.sort(key=lambda m: m['title'])
-                elif input_user == 2:
+                elif input_user == 'asc':
                     list_of_dict_movies.sort(key=lambda m: m['title'], reverse=True)
 
                 # list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
@@ -97,10 +99,10 @@ def list_movies_desc_asc(path, input_user):
                 return list_of_dict_movies
 
 
-if __name__ == '__main__':
-    input_user = 'Toy Story'
-    path = '../movie_files'
-    # list_movies_desc_asc(path, 1)
-
-    search_movie_title_typing(input_user)
-    search_movie_by_release_dates('1995')
+# if __name__ == '__main__':
+#     input_user = 'Toy Story'
+# #     path = '../movie_files'
+# #     # list_movies_desc_asc(path, 1)
+# #
+#     search_movie_title_typing(input_user)
+#     # search_movie_by_release_dates('1995')
