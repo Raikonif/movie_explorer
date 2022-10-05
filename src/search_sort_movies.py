@@ -40,7 +40,22 @@ def search_movie_title_typing(input_user):
 
 
 def search_movie_by_release_dates(input_user):
-    pass
+    files = search_files_csv(path)
+    for file in files:
+        concat_dir = path + '/' + file
+        if os.path.exists(concat_dir):
+            with open(concat_dir, 'r', encoding='utf-8') as file_name:
+                reader = csv.reader(file_name)
+                exist = False
+                input_formatted = "({})".format(input_user)
+                for row in reader:
+                    if input_formatted in row[1]:
+                        print(row)
+                        exist = True
+
+                if not exist:
+                    print('Movie with that release not found')
+                return row
 
 
 def list_movies_desc_asc(path, input_user):
@@ -88,3 +103,4 @@ if __name__ == '__main__':
     # list_movies_desc_asc(path, 1)
 
     search_movie_title_typing(input_user)
+    search_movie_by_release_dates('1995')
