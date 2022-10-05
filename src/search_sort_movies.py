@@ -45,7 +45,7 @@ def list_movies_desc_asc(path, input_user):
                 elif input_user == 2:
                     list_of_dict_movies.sort(key=lambda m: m['title'], reverse=True)
 
-                list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
+                list_print = [dict_movie for dict_movie in list_of_dict_movies]
                 return list_of_dict_movies
 
 
