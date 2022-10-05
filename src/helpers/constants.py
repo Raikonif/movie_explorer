@@ -23,25 +23,31 @@ def main_tag():
 
 # constant that content the comands available for the user
 MAIN_DICTIONARY={
-  "--help" :
-  ["This comand show the all information of the data",main_help],
-
   "--title" :
   ['this function returns a list of movies. Insert "all" to return all the database, or specify the name of the wantde movie. Regex available. You can use it with "--sort" "by"',main_title],
-
-  "--tag" : 
-  ["This return something that I dont understand TODO",main_tag],
-
-  "--rating" : 
-  ["This comand show all movies that have the specified rating",main_ratin],
 
   "--genres" : 
   ["This will return a response that have movies that have the same genre",main_genres],
 
+  "--rating" : 
+  ["This comand show all movies that have the specified rating",main_ratin],
+
+  "--tag" : 
+  ["This return something that I dont understand TODO"],
+
+  "--release_date" : 
+  ["This only works with title"],
+  
+  "--order" : 
+  ["This only works with title"],
+  
+  "--by" : 
+  ["This only works with title"],
+
 }
 
 # python3 movies_explorer --help
-# python3 movies_explorer --title all --order desc --by title
+# python3 movies_explorer --title all --order desc --by [title a - z] [ genres a - z] [ rating a-z ...]
 # python3 movies_explorer --title "doctorextrange"
 # python3 movies_explorer --title Sabrina --release_date all
 # python3 movies_explorer --title "Home Alone 2" --tag sequel
