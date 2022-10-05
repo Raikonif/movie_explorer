@@ -1,19 +1,20 @@
 import os
 import sys
 import csv
+from pathlib import Path
 from operator import itemgetter
 import re
 
 
 def search_files_csv(path):
-    with os.scandir(path) as entries:
+    with os.scandir(Path(path)) as entries:
         files = [f.name for f in entries if f.name.endswith('movies.csv')]
     return files
 
 
 def list_movies_desc_asc(path, input_user):
     # path = '../movie_files'
-    files = search_files_csv(path)
+    files = search_files_csv(Path(path))
     list_of_dict_movies = []
     list_sorted = []
     # print(files)
@@ -45,7 +46,7 @@ def list_movies_desc_asc(path, input_user):
                     list_of_dict_movies.sort(key=lambda m: m['title'], reverse=True)
 
                 list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
-                return list_print
+                return list_of_dict_movies
 
 
 if __name__ == '__main__':
