@@ -1,3 +1,4 @@
 movies/
 src/__pycache__/
 src/helpers/__pycache__/
+__pycache__/
