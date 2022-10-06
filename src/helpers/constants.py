@@ -1,48 +1,24 @@
-def main_help():
-  print()
-  for key, element in MAIN_DICTIONARY.items():
-    print(key + ":" , element[0], sep="\n")
-    print()
-
-
-def main_title():
-  print("calling main_title function")
-
-
-def main_ratin():
-  print("calling main_ratin function")
-
-
-def main_genres():
-  print("calling main_genres function")
-
-
-def main_tag():
-  print("calling main_tag function")
-
-
-# constant that content the comands available for the user
 MAIN_DICTIONARY={
   "--title" :
-  ['this function returns a list of movies. Insert "all" to return all the database, or specify the name of the wantde movie. Regex available. You can use it with "--sort" "by"',main_title],
+  'this function returns a list of movies. Introduce "all" to get all movies or "key_name" to get movies that have the word in the title movie. Introduce order[desc] or order[asc], and by[title] or by[genre] or by[rating] or by[tag] to get the list of movies ordered[mode] by[column_data]',
 
   "--genres" : 
-  ["This will return a response that have movies that have the same genre",main_genres],
+  "This will return a list of movies of a specified genre --genres[genre_key_word]",
 
   "--rating" : 
-  ["This comand show all movies that have the specified rating",main_ratin],
+  "This will return a list of movies of a specified rate --rating[rate_key_number]",
 
   "--tag" : 
-  ["This return something that I dont understand TODO"],
+  "This will return a list of movies of a specified tag --tag[tag_key_word]. This option works with --title",
 
   "--release_date" : 
-  ["This only works with title"],
+  "This will return a list of movies of a specified tag --tag[tag_key_word]. This option works with --title",
   
   "--order" : 
-  ["This only works with title"],
+  "This will return a list of movies of a specified tag --tag[tag_key_word]. This option works with --title and --by together",
   
   "--by" : 
-  ["This only works with title"],
+  "This will return a list of movies of a specified tag --tag[tag_key_word]. This option works with --title and --by together",
 
 }
 
