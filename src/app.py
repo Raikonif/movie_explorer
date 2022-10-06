@@ -1,13 +1,8 @@
-#import sys
+# import sys
 from helpers.utility_help import get_argument
+from search_sort_movies import search_movie_title_typing, list_movies_desc_asc, search_movie_by_release_dates
 from helpers.constants import MAIN_DICTIONARY
 import argparse
-# if __name__ == '__main__':
-#get_argument(sys.argv[1])
-    # result = search_files_csv('../movie_files')
-    # print(result)
-    # print('hello world!')
-    
 
 # def validate_comand(list_comands):
 #   if list_comands[1] == "--help":
@@ -22,12 +17,13 @@ import argparse
 
 #   return arguments_dic
 
-#print(MAIN_DICTIONARY["--help"][0])
-from search_sort_movies import search_movie_title_typing, list_movies_desc_asc, search_movie_by_release_dates
+# print(MAIN_DICTIONARY["--help"][0])
 
 
 def is_order_and_by_in_dictionary(dictionary):
-  return True if dictionary.get('order') != None and dictionary.get('by') != None else False
+    return True if dictionary.get('order') != None and dictionary.get('by') != None else False
+
+
 #  return_if_true if condition else condition_if_false
 
 
@@ -39,16 +35,12 @@ def is_order_and_by_in_dictionary(dictionary):
 # 'Yes' if fruit == 'Apple' else 'No'
 
 
-
 def is_release_date_in_dictionary(dictionary):
-   return True if dictionary.get('release_date') != None else False
+    return True if dictionary.get('release_date') != None else False
+
 
 def is_tag_in_dictionary(dictionary):
-   return True if dictionary.get('tag') != None else False
-
-
-
-
+    return True if dictionary.get('tag') != None else False
 
 
 parser = argparse.ArgumentParser("this a description")
@@ -56,42 +48,38 @@ parser = argparse.ArgumentParser("this a description")
 parser.add_argument('-t', '--title', type=str, metavar='N', help=MAIN_DICTIONARY["--title"][0])
 parser.add_argument('-g', '--genres', type=str, help=MAIN_DICTIONARY["--genres"][0])
 parser.add_argument('-r', '--rating', type=str, help=MAIN_DICTIONARY["--rating"][0])
-parser.add_argument('-l', '--tag',type=str, help=MAIN_DICTIONARY["--tag"][0])
+parser.add_argument('-l', '--tag', type=str, help=MAIN_DICTIONARY["--tag"][0])
 parser.add_argument('-d', '--release_date', type=str, help=MAIN_DICTIONARY["--release_date"][0])
 parser.add_argument('-o', '--order', type=str, help=MAIN_DICTIONARY["--order"][0])
 parser.add_argument('-b', '--by', type=str, help=MAIN_DICTIONARY["--by"][0])
 
-
 args = parser.parse_args()
 
-variables = vars(args) 
+variables = vars(args)
 print(variables)
-#parser.add_argument('-t', '--tittle', type=str, help='nombre de la pelicula a buscar')
+# parser.add_argument('-t', '--tittle', type=str, help='nombre de la pelicula a buscar')
 if variables.get('title') == None and variables.get('genres') == None and variables.get('rating') == None:
-  print("NO HACE NADA")
+    print("NO HACE NADA")
 else:
-  if variables.get('title') != None:
-    if is_order_and_by_in_dictionary(variables):
-      print("ejecutamos serach sort movies by [title] order [desc]")
-      list_movies_desc_asc(variables['order'])
-    elif is_release_date_in_dictionary(variables):
-      print("llamamos a la funcion title  y le pasamos [release_date]")
-      search_movie_by_release_dates(variables['release_date'])
-    elif variables.get('order') != None or variables.get('by') != None:
-      print("no se admite order o by")
+    if variables.get('title') != None:
+        if is_order_and_by_in_dictionary(variables):
+            print("ejecutamos serach sort movies by [title] order [desc]")
+            list_movies_desc_asc(variables['order'])
+        elif is_release_date_in_dictionary(variables):
+            print("llamamos a la funcion title  y le pasamos [release_date]")
+            search_movie_by_release_dates(variables['release_date'])
+        elif variables.get('order') != None or variables.get('by') != None:
+            print("no se admite order o by")
+        else:
+            print("solo pelis")
+            search_movie_title_typing(variables['title'])
+
+    elif variables.get('genres') != None:
+        print("Llamamos a la funcion que obtiene los generos")
+    elif variables.get('rating') != None:
+        print("Llamamos a la funcio que obtiene por rating")
     else:
-      print("solo pelis")
-      search_movie_title_typing(variables['title'])
-
-  elif variables.get('genres') != None:
-    print("Llamamos a la funcion que obtiene los generos")
-  elif variables.get('rating') != None:
-    print("Llamamos a la funcio que obtiene por rating")
-  else:
-    print("comandos incorrectos")
-
-
-
+        print("comandos incorrectos")
 
 # if --title Sabrina --release_date all == --title Sabrina --release_date all
 
@@ -117,9 +105,6 @@ else:
 #     --tag                 => default = 'all'
 
 
-
-
-
 # --rating                  => default = 'all'
 #     --order
 #     --by
@@ -127,13 +112,8 @@ else:
 #     --tag
 
 
-
-
 # --genres                  => default = 'all'
 #     --order
 #     --by
 #     --release_date
 #     --tag
-
-
-
