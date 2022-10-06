@@ -39,10 +39,51 @@ def is_release_date_in_dictionary(dictionary):
     return True if dictionary.get('release_date') != None else False
 
 
+def iniciar():
+=======
 def is_tag_in_dictionary(dictionary):
     return True if dictionary.get('tag') != None else False
 
 
+  parser = argparse.ArgumentParser("this a description")
+
+  parser.add_argument('-t', '--title', type=str, metavar='N', help=MAIN_DICTIONARY["--title"][0])
+  parser.add_argument('-g', '--genres', type=str, help=MAIN_DICTIONARY["--genres"][0])
+  parser.add_argument('-r', '--rating', type=str, help=MAIN_DICTIONARY["--rating"][0])
+  parser.add_argument('-l', '--tag',type=str, help=MAIN_DICTIONARY["--tag"][0])
+  parser.add_argument('-d', '--release_date', type=str, help=MAIN_DICTIONARY["--release_date"][0])
+  parser.add_argument('-o', '--order', type=str, help=MAIN_DICTIONARY["--order"][0])
+  parser.add_argument('-b', '--by', type=str, help=MAIN_DICTIONARY["--by"][0])
+
+
+
+  args = parser.parse_args()
+
+  variables = vars(args) 
+  print(variables)
+  #parser.add_argument('-t', '--tittle', type=str, help='nombre de la pelicula a buscar')
+  if variables.get('title') == None and variables.get('genres') == None and variables.get('rating') == None:
+    print("NO HACE NADA")
+  else:
+    if variables.get('title') != None:
+      if is_order_and_by_in_dictionary(variables):
+        print("ejecutamos serach sort movies by [title] order [desc]")
+      elif is_release_date_in_dictionary(variables):
+        print("llamamos a la funcion title  y le pasamos [release_date]")
+      elif variables.get('order') != None or variables.get('by') != None:
+        print("no se admite order o by")
+      else:
+        print("solo pelis")
+    elif variables.get('genres') != None:
+      print("Llamamos a la funcion que obtiene los generos")
+    elif variables.get('rating') != None:
+      print("Llamamos a la funcio que obtiene por rating")
+    else:
+      print("comandos incorrectos")
+
+
+iniciar()
+=======
 parser = argparse.ArgumentParser("this a description")
 
 parser.add_argument('-t', '--title', type=str, metavar='N', help=MAIN_DICTIONARY["--title"][0])
