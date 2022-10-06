@@ -1,25 +1,41 @@
-import sys
-from helpers.constants import MAIN_DICTIONARY
+from search_sort_movies import search_movie_title_typing, list_movies_desc_asc, search_movie_by_release_dates
 
 
-def get_argument(arg_key):
-  is_argument = False
-  for key, value in MAIN_DICTIONARY.items():
-    if arg_key == key:
-      is_argument = True
-      value[1]()
-      break
-
-  if is_argument == False:
-    print("not valid comand. Please try to write down app.py --help")
+def is_order_and_by_in(dictionary):
+    return True if dictionary.get('order') != None and dictionary.get('by') != None else False
 
 
-
-# def join_elements_list(list_comands):
-#   listToStr = ' '.join([str(elem) for elem in list_comands])
-#   return listToStr
+def is_release_date_in(dictionary):
+    return True if dictionary.get('release_date') != None else False
 
 
-def validate_input(arg_list):
-  pass
+def is_tag_in(dictionary):
+    return True if dictionary.get('tag') != None else False
+
+
+def validate_comand(dictionary):
+  if dictionary.get('title') == None and dictionary.get('genres') == None and dictionary.get('rating') == None:
+    print("Introduce --help to know comands available")
+  else:
+      if dictionary.get('title') != None:
+          if is_order_and_by_in(dictionary):
+              # Call function to get movies data ordered [desc,ascd] by ['title','tag','genre','rating']
+              list_movies_desc_asc(dictionary['title'], dictionary['order'], dictionary['by'])
+          elif is_release_date_in(dictionary):
+              # Call function to get movies that have the especified date release
+              search_movie_by_release_dates(dictionary['title'], dictionary['release_date'])
+          elif dictionary.get('order') != None or dictionary.get('by') != None:
+              # option ORDER and BY work together, the user must introduce both
+              print("Introduce --help to know comands available, ORDER and BY options works together")
+          else:
+              # The only option introduced was title, we call function that returns all movies.
+              search_movie_title_typing(dictionary['title'])
+      elif dictionary.get('genres') != None:
+          # The only option introduced was --GENRE, we call a function that return movies that belong to the same genre.
+          pass
+      elif dictionary.get('rating') != None:
+          # The only option introduced was --RATING, we call a function that return movies that have the same rate
+          pass
+      else:
+          print("Introduce --help to know comands available")
 
