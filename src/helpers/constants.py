@@ -22,35 +22,3 @@ MAIN_DICTIONARY={
 
 }
 
-# python3 movies_explorer --help
-# python3 movies_explorer --title all --order desc --by [title a - z] [ genres a - z] [ rating a-z ...]
-# python3 movies_explorer --title "doctorextrange"
-# python3 movies_explorer --title Sabrina --release_date all
-# python3 movies_explorer --title "Home Alone 2" --tag sequel
-# python3 movies_explorer --rating 3.0
-# python3 movies_explorer --genres [word]
-
-
-
-# comands
-
-# --help
-
-# --title all
-# --title "T" (any words)
-
-# --order desc asc
-
-# --by title count
-
-# --title "T" (any words)
-
-# --genre all or "Animation" (Any word)
-
-# --release_date all or (any number)
-
-# --tag "sequel" (any word)
-
-# --ratings all or 3.0 (any float)
-
-# --user 1 (any id)
