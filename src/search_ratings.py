@@ -54,8 +54,10 @@ def generate_response_search_ratings(movies_data, csv_data_ratings):
     list_movies_with_ratings = []
     format_date = '%A, %B %d, %Y, %I:%M:%S %p'
     for movie in movies_data:
-        movie[0]['ratings'] = [dict({'date_time' : dt.strptime(rating[-1], format_date), 'rating': float(rating[2])}) for rating in csv_data_ratings if movie[0]['movieId'] == rating[1]]
-
+        movie[0]['ratings'] = [dict({'date_time' : str(dt.strptime(rating[-1], format_date)),
+            'rating': float(rating[2])}) for rating in csv_data_ratings if
+            movie[0]['movieId'] == rating[1]]
+    return movies_data
 
 
 def search_by_ratings(variables):
@@ -68,4 +70,5 @@ def search_by_ratings(variables):
         movies_data = get_movies_data(csv_data_ratings, input_rating=rating)
     response_data = generate_response_search_ratings(movies_data=movies_data, csv_data_ratings=csv_data_ratings)
     id = unique_identifier = uuid.uuid4()
+    print(response_data)
     save_responses(response_data, id)
