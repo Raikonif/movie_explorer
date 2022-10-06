@@ -13,6 +13,7 @@ def manage_user_input():
   parser.add_argument('-d', '--release_date', type=str, help=MAIN_DICTIONARY["--release_date"])
   parser.add_argument('-o', '--order', type=str, help=MAIN_DICTIONARY["--order"])
   parser.add_argument('-b', '--by', type=str, help=MAIN_DICTIONARY["--by"])
+  parser.add_argument('-c','--count', action='store_true')
 
   args = parser.parse_args()
   dict_options_args = vars(args)
