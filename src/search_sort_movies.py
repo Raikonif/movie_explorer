@@ -28,6 +28,7 @@ def search_movie_by_release_dates(title, release_date):
         elif title != 'all' and release_date in dict_movie['title'] and title in dict_movie['title']:
             print(dict_movie)
             exist = True
+
     if not exist:
         print('Movie not found')
 
