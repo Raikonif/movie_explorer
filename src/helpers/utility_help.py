@@ -1,6 +1,8 @@
 from itertools import count
 from search_sort_movies import search_movie_title_typing, list_movies_desc_asc, search_movie_by_release_dates
 from genres_funcions import sort_by_genre, count_titles_by_genre
+from search_ratings import search_by_ratings
+
 
 
 def is_order_and_by_in(dictionary):
@@ -41,7 +43,7 @@ def validate_comand(dictionary):
             print(sort_by_genre()) 
       elif dictionary.get('rating') != None:
           # The only option introduced was --RATING, we call a function that return movies that have the same rate
-          pass
+          search_by_ratings(dictionary['rating'])
       else:
           print("Introduce --help to know comands available")
 
