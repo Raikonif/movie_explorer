@@ -64,10 +64,10 @@ else:
     if variables.get('title') != None:
         if is_order_and_by_in_dictionary(variables):
             print("ejecutamos serach sort movies by [title] order [desc]")
-            list_movies_desc_asc(variables['order'])
+            list_movies_desc_asc(variables['title'], variables['order'], variables['by'])
         elif is_release_date_in_dictionary(variables):
             print("llamamos a la funcion title  y le pasamos [release_date]")
-            search_movie_by_release_dates(variables['release_date'])
+            search_movie_by_release_dates(variables['title'], variables['release_date'])
         elif variables.get('order') != None or variables.get('by') != None:
             print("no se admite order o by")
         else:
