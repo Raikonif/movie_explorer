@@ -28,7 +28,7 @@ def get_release_date(movie):
 
 def replace_title(movie_title):
     try:
-        movie_title.replace(re.search(r"\((\d*)\)", movie).group(1))
+        movie_title.replace(re.search(r"\((\d*)\)", movie_title).group(1))
         return movie_title
     except:
         return 99999
