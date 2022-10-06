@@ -1,2 +1,5 @@
 movies/
 src/__pycache__/
+src/helpers/__pycache__/
+__pycache__/
+src/improve_fun.py
