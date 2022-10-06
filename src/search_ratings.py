@@ -1,6 +1,8 @@
 import os, csv, re
 from datetime import datetime as dt
-from search_sort_movies import list_movies_desc_asc
+import uuid
+from core_functions import data_management
+from save_responses import save_responses
 
 relative_path_ratings = '../movie_files/ratings.csv'
 relative_path_movies = '../movie_files/movies.csv'
@@ -24,10 +26,10 @@ def data_ratings(input_rating):
 
 def get_movies_data(csv_data_ratings, input_rating):
     list_data_movies_filtered = []
-    list_data_movies = list_movies_desc_asc(relative_path_movies)
+    list_data_movies = data_management()
     set_moveId = set([row[1] for row in csv_data_ratings])
-    for move_id in set_moveId:
-        list_data_movies_filtered.append([dict_obj for dict_obj in list_data_movies if dict_obj['movieId'] == move_id])
+    #for move_id in set_moveId:
+    list_data_movies_filtered.append([dict_obj for dict_obj in list_data_movies if dict_obj['movieId'] in set_moveId])
     for movie in list_data_movies_filtered:
         movie[0]['release_date'] = get_release_date(movie[0]['title'])
     return list_data_movies_filtered
@@ -53,21 +55,17 @@ def generate_response_search_ratings(movies_data, csv_data_ratings):
     format_date = '%A, %B %d, %Y, %I:%M:%S %p'
     for movie in movies_data:
         movie[0]['ratings'] = [dict({'date_time' : dt.strptime(rating[-1], format_date), 'rating': float(rating[2])}) for rating in csv_data_ratings if movie[0]['movieId'] == rating[1]]
-    print(csv_data_ratings)
+
 
 
 def search_by_ratings(variables):
-    # {'title': None, 'genres': None, 'rating': '3.0', 'tag': None, 'release_date': None, 'order': None, 'by': None}
-    title = variables['title'] if variables['title'] is not None else 'all'
-    rating = float(variables['rating']) if variables['rating'] is not None else '0.0'
-    tag = variables['tag'] if variables['tag'] is not None else 'all'
-    order = variables['order'] if variables['order'] is not None else 'all'
-    by = variables['by'] if variables['by'] is not None else 'all'
+    rating = float(variables)
 
     csv_data_ratings = []
     movies_data = []
-
     csv_data_ratings = get_ratings_data()
     if csv_data_ratings:
         movies_data = get_movies_data(csv_data_ratings, input_rating=rating)
     response_data = generate_response_search_ratings(movies_data=movies_data, csv_data_ratings=csv_data_ratings)
+    id = unique_identifier = uuid.uuid4()
+    save_responses(response_data, id)
