@@ -27,7 +27,7 @@ def filter_data_with_input_args(data_csv, input_args):
     #                                                and data_csv[3]['tags'] == '.*'
     #                                                and data_csv[4]['release_date'] == '.*'
     #                                                and data_csv[5]['ratings'] == '.*']
-    filtered_data = [item for item in data_csv if re.match('.*title1 (1996).*', str(data_csv[0]['moveId']))]
+    filtered_data = [item for item in data_csv if re.match('title', str(data_csv[0]['moveId']))]
     return filtered_data
 
 def research(input_args):
