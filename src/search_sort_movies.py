@@ -42,10 +42,10 @@ def list_movies_desc_asc(title, order, by):
     for dict_movie in file:
         print(dict_movie)
 
-
-if __name__ == '__main__':
-    input_user = 'Toy Story'
-    # path = '../movie_files'
-    # list_movies_desc_asc('all', 'desc', 'title')
-    # search_movie_title_typing(input_user)
-    search_movie_by_release_dates('all', '1995')
+#
+# if __name__ == '__main__':
+#     input_user = 'Toy Story'
+#     # path = '../movie_files'
+#     # list_movies_desc_asc('all', 'desc', 'title')
+#     # search_movie_title_typing(input_user)
+#     search_movie_by_release_dates('all', '1995')
