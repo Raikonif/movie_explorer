@@ -40,13 +40,10 @@ def data_management():
         concat_path = PATH + '/' + file
         if os.path.exists(concat_path):
             with open(concat_path, 'r', encoding='utf-8') as file_name:
-                # reader = csv.reader(file_name, delimiter=',')
                 for line in file_name:
                     list_line = format_line(line)
                     create_list_of_dict_movies(list_line, list_of_dict_movies)
             # list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
-            # print(list_of_dict_movies)
-            # print(list_of_dict_movies)
             return list_of_dict_movies
 
 

@@ -75,12 +75,12 @@ def data_management(file):
     # for file in files:
     concat_path = PATH + '/' + file
     if os.path.exists(concat_path) and file == 'movies.csv':
-        handle_file_open(concat_path, create_list_of_dict_movies())
         with open(concat_path, 'r', encoding='utf-8') as file_name:
             for line in file_name:
                 list_line = format_line(line)
                 create_list_of_dict_movies(list_line, list_of_dict_movies)
             # print(list_of_dict_movies)
+            handle_file_open(concat_path, create_list_of_dict_movies(list_line, list_of_dict_movies))
         print('file exist and is movies.csv')
 
     elif os.path.exists(concat_path) and file == 'ratings.csv':

@@ -27,7 +27,7 @@ def data_ratings(input_rating):
 def get_movies_data(csv_data_ratings, input_rating):
     list_data_movies_filtered = []
     list_data_movies = data_management()
-    set_moveId = set([row[1] for row in csv_data_ratings])
+    set_moveId = set([row[0] for row in csv_data_ratings])
     #for move_id in set_moveId:
     list_data_movies_filtered.append([dict_obj for dict_obj in list_data_movies if dict_obj['movieId'] in set_moveId])
     for movie in list_data_movies_filtered:
@@ -51,22 +51,20 @@ def get_ratings_data(input_rating=0.0):
     return csv_data
 
 def generate_response_search_ratings(movies_data, csv_data_ratings):
-    list_movies_with_ratings = []
     format_date = '%A, %B %d, %Y, %I:%M:%S %p'
     for movie in movies_data:
-        movie[0]['ratings'] = [dict({'date_time' : str(dt.strptime(rating[-1], format_date)), 'rating': float(rating[2])}) for rating in csv_data_ratings if movie[0]['movieId'] == rating[1]]
+        movie[0]['ratings'] = [dict({'date_time' : str(dt.strptime(rating[-1], format_date)),
+                                      'rating': float(rating[2])}) for rating in csv_data_ratings
+                                      if movie[0]['movieId'] == rating[1]]
+    movies_data.append({'size':len(movies_data)})
     return movies_data
 
 
 def search_by_ratings(variables):
     rating = float(variables)
-
     csv_data_ratings = []
     movies_data = []
     csv_data_ratings = get_ratings_data()
     if csv_data_ratings:
         movies_data = get_movies_data(csv_data_ratings, input_rating=rating)
     response_data = generate_response_search_ratings(movies_data=movies_data, csv_data_ratings=csv_data_ratings)
-    print(response_data)
-    id = unique_identifier = uuid.uuid4()
-    save_responses(response_data, id)
