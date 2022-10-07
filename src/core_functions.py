@@ -35,7 +35,6 @@ def create_list_of_dict_movies(list_line, list_of_dict_movies):
 # this fun use the functions above search_files_csv, format_line, create_list_of_dict_movies
 def data_management():
     files = search_files_csv(PATH)
-    # print(files)
     list_of_dict_movies = []
     for file in files:
         concat_path = PATH + '/' + file
