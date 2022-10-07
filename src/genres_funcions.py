@@ -3,6 +3,7 @@ import os
 import csv
 
 def count_titles_by_genre(asc = None):
+
     genres_Dict = {}
     count = 0
     movies_list = data_management()
@@ -10,6 +11,7 @@ def count_titles_by_genre(asc = None):
     genres = sort_by_genre()
     for element in genres:
         genres_Dict.update({element: count})
+        
     for row in movies_list :
         for genre in row['genres']:
             if genre in genres_Dict:
@@ -38,3 +40,4 @@ def sort_by_genre():
       
     return filter_gen 
             
+

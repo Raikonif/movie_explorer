@@ -2,12 +2,13 @@ import json
 import os
 import csv
 
-PATH = '../movie_files'
+testo = "movies"
+PATH = f'../movie_files' # cambiar para pat
 
 
 def search_files_csv(path):
     with os.scandir(path) as entries:
-        files = [f.name for f in entries if f.name.endswith('movies.csv')]
+        files = [f.name for f in entries if f.name.endswith('.csv')]
     return files
 
 
@@ -18,7 +19,7 @@ def format_line(line):
     last_replace = reversed_row.replace(' ', ',', 1)
     row = last_replace[::-1]
     line_formatted = row.strip().split(',')
-    line_formatted[2] = line_formatted[2].replace('|', ',').split(',')
+    line_formatted[2] = line_formatted[2].split('|')
     return line_formatted
 
 
@@ -34,6 +35,7 @@ def create_list_of_dict_movies(list_line, list_of_dict_movies):
 # this fun use the functions above search_files_csv, format_line, create_list_of_dict_movies
 def data_management():
     files = search_files_csv(PATH)
+    # print(files)
     list_of_dict_movies = []
     for file in files:
         concat_path = PATH + '/' + file
@@ -44,6 +46,7 @@ def data_management():
                     list_line = format_line(line)
                     create_list_of_dict_movies(list_line, list_of_dict_movies)
             # list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
+            # print(list_of_dict_movies)
             # print(list_of_dict_movies)
             return list_of_dict_movies
 
@@ -59,5 +62,5 @@ if __name__ == '__main__':
     input_user = 'Toy Story'
     # path = '../movie_files'
     # list_movies_desc_asc('desc')
-    # data_management()
-    convert_to_json_file()
+    data_management()
+    # convert_to_json_file()
