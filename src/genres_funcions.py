@@ -33,15 +33,18 @@ def count_titles_by_genre(asc = None):
     genres = get_genres()
     for element in genres:
         genres_Dict.update({element: count})
+
     for row in movies_list :
         for genre in row['genres']:
             if genre in genres_Dict:
                 genres_Dict[genre]+=1   
     if  asc == 'asc':                
+
         genres_Dict = dict(sorted(genres_Dict.items(), key=lambda item: item[1]))                   
     elif asc == 'desc':
         genres_Dict = dict(sorted(genres_Dict.items(), key=lambda item: item[1],reverse = True))                
     create_obj(genres_Dict)                       
+
     return genres_Dict
 
 
@@ -50,3 +53,4 @@ def sort_by_genre():
     create_obj(filter_gen)
     return filter_gen 
             
+

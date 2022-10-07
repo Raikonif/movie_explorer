@@ -22,6 +22,31 @@ def format_line(line):
     return line_formatted
 
 
+def format_line_of_tags_ratings(line):
+    line_formatted = line.strip().split(',')
+    return line_formatted
+
+
+def create_list_of_dicts_tag(list_line, list_of_dict_tag):
+    dict_tag = {
+        'userId': list_line[0],
+        'movieId': list_line[1],
+        'tag': list_line[2],
+        'timestamp': list_line[3]
+    }
+    list_of_dict_tag.append(dict_tag)
+
+
+def create_list_of_dicts_rating(list_line, list_of_dict_rating):
+    dict_rating = {
+        'userId': list_line[0],
+        'movieId': list_line[1],
+        'rating': list_line[2],
+        'timestamp': list_line[3]
+    }
+    list_of_dict_rating.append(dict_rating)
+
+
 def create_list_of_dict_movies(list_line, list_of_dict_movies):
     dict_movie = {
         'movieId': list_line[0],
@@ -31,41 +56,48 @@ def create_list_of_dict_movies(list_line, list_of_dict_movies):
     list_of_dict_movies.append(dict_movie)
 
 
-# this fun use the functions above search_files_csv, format_line, create_list_of_dict_movies
-def data_management():
-    files = search_files_csv(PATH)
-    list_of_dict_movies = []
-    list_of_list_of_dict_movies = []
-    for file in files:
-        concat_path = PATH + '/' + file
-        # print(file)
-        if os.path.exists(concat_path) and file == 'movies.csv':
+def handle_file_open(concat_path, format_line_type, list_of_dict, create_list_of_dict):
+    with open(concat_path, 'r', encoding='utf-8') as file_name:
+        for line in file_name:
+            list_line = format_line_type(line)
+            create_list_of_dict_movies(list_line, list_of_dict)
+        # print(list_of_dict_movies)
+    print('file exist and is movies.csv')
+    pass
 
-            print('file exist and is movies.csv')
-            pass
-        elif os.path.exists(concat_path) and file == 'ratings.csv':
-            print('file exist and is ratings.csv')
-            pass
-        elif os.path.exists(concat_path) and file == 'tags.csv':
-            print('file exist and is tags.csv')
-            pass
-        # if os.path.exists(concat_path) and file == 'movies.csv':
-        #     print('movies.csv')
-        #     with open(concat_path, 'r', encoding='utf-8') as file_name:
-        #         # reader = csv.reader(file_name, delimiter=',')
-        #         for line in file_name:
-        #             list_line = format_line(line)
-        #             create_list_of_dict_movies(list_line, list_of_dict_movies)
-        #     # list_print = [print(dict_movie) for dict_movie in list_of_dict_movies]
-        #     # print(list_of_dict_movies)
-        #     list_of_dict_movies.append(list_of_dict_movies)
-        #     list_of_list_of_dict_movies.append(list_of_list_of_dict_movies)
-        # elif os.path.exists(concat_path) and file == 'ratings.csv':
-        #     print('ratings.csv')
-        # elif os.path.exists(concat_path) and file == 'tags.csv':
-        #     print('tags.csv')
-        # print(list_of_list_of_dict_movies)
-        # return list_of_list_of_dict_movies
+
+# this fun use the functions above search_files_csv, format_line, create_list_of_dict_movies
+def data_management(file):
+    # files = search_files_csv(PATH)
+    list_of_dict_movies = []
+    list_of_dict_tag = []
+    list_of_dict_rating = []
+    # for file in files:
+    concat_path = PATH + '/' + file
+    if os.path.exists(concat_path) and file == 'movies.csv':
+        handle_file_open(concat_path, create_list_of_dict_movies())
+        with open(concat_path, 'r', encoding='utf-8') as file_name:
+            for line in file_name:
+                list_line = format_line(line)
+                create_list_of_dict_movies(list_line, list_of_dict_movies)
+            # print(list_of_dict_movies)
+        print('file exist and is movies.csv')
+
+    elif os.path.exists(concat_path) and file == 'ratings.csv':
+        with open(concat_path, 'r', encoding='utf-8') as file_name:
+            for line in file_name:
+                list_line = format_line_of_tags_ratings(line)
+                create_list_of_dicts_rating(list_line, list_of_dict_rating)
+            print(list_of_dict_rating)
+        print('file exist and is ratings.csv')
+        pass
+    elif os.path.exists(concat_path) and file == 'tags.csv':
+        with open(concat_path, 'r', encoding='utf-8') as file_name:
+            for line in file_name:
+                list_line = format_line_of_tags_ratings(line)
+                create_list_of_dicts_tag(list_line, list_of_dict_tag)
+            # print(list_of_dict_tag)
+        print('file exist and is tags.csv')
 
 
 def convert_to_json_file():
@@ -79,5 +111,5 @@ if __name__ == '__main__':
     input_user = 'Toy Story'
     # path = '../movie_files'
     # list_movies_desc_asc('desc')
-    data_management()
+    data_management('ratings.csv')
     # convert_to_json_file()

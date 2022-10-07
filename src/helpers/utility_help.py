@@ -4,6 +4,7 @@ from genres_funcions import sort_by_genre, count_titles_by_genre
 from search_ratings import search_by_ratings
 
 
+
 def is_order_and_by_in(dictionary):
     return True if dictionary.get('order') != None and dictionary.get('by') != None else False
 
@@ -14,6 +15,7 @@ def is_release_date_in(dictionary):
 
 def is_tag_in(dictionary):
     return True if dictionary.get('tag') != None else False
+
 
 
 def validate_comand(dictionary):
