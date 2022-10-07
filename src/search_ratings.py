@@ -68,3 +68,4 @@ def search_by_ratings(variables):
     if csv_data_ratings:
         movies_data = get_movies_data(csv_data_ratings, input_rating=rating)
     response_data = generate_response_search_ratings(movies_data=movies_data, csv_data_ratings=csv_data_ratings)
+    return response_data

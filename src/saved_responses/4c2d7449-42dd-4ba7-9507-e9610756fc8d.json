@@ -1,0 +1,82 @@
+{
+    "ID": "4c2d7449-42dd-4ba7-9507-e9610756fc8d",
+    "DATA": [
+        {
+            "genre": "Drama",
+            "count": 4361
+        },
+        {
+            "genre": "Comedy",
+            "count": 3756
+        },
+        {
+            "genre": "Thriller",
+            "count": 1894
+        },
+        {
+            "genre": "Action",
+            "count": 1828
+        },
+        {
+            "genre": "Romance",
+            "count": 1596
+        },
+        {
+            "genre": "Adventure",
+            "count": 1263
+        },
+        {
+            "genre": "Crime",
+            "count": 1199
+        },
+        {
+            "genre": "Sci-Fi",
+            "count": 980
+        },
+        {
+            "genre": "Horror",
+            "count": 978
+        },
+        {
+            "genre": "Fantasy",
+            "count": 779
+        },
+        {
+            "genre": "Children",
+            "count": 664
+        },
+        {
+            "genre": "Animation",
+            "count": 611
+        },
+        {
+            "genre": "Mystery",
+            "count": 573
+        },
+        {
+            "genre": "Documentary",
+            "count": 440
+        },
+        {
+            "genre": "War",
+            "count": 382
+        },
+        {
+            "genre": "Musical",
+            "count": 334
+        },
+        {
+            "genre": "Western",
+            "count": 167
+        },
+        {
+            "genre": "IMAX",
+            "count": 158
+        },
+        {
+            "genre": "Film-Noir",
+            "count": 87
+        }
+    ],
+    "SIZE": 19
+}
