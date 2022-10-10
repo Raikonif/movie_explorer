@@ -1,4 +1,4 @@
-import uuid, ast
+import uuid
 from datetime import datetime as dt
 import csv
 
