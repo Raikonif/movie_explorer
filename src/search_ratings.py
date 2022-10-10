@@ -1,70 +1,50 @@
-import os, csv, re
+from reader import get_list_of_dictionaries
 from datetime import datetime as dt
-import uuid
-from core_functions import data_management
-from save_responses import save_responses
+import re
 
-relative_path_ratings = '../movie_files/ratings.csv'
-relative_path_movies = '../movie_files/movies.csv'
+def format_timestamp(data_ratings):
+    for row in data_ratings: # "Monday, September 25, 2006 9:40:36 PM"
+        row['timestamp'] = dt.strftime(dt.fromtimestamp(int(row['timestamp'])), '%A, %B %d, %Y %I:%M:%S %p')
+    return data_ratings
 
-def get_release_date(movie):
-    try:
-        release_year = re.search(r"\((\d*)\)", movie).group(1)
-        return release_year
-    except:
-        return 99999
+def get_data_ratings(input_rating):
+    data_ratings = get_list_of_dictionaries('ratings')
+    data_ratings_filtered = [rating for rating in data_ratings if rating['rating'] == input_rating]
+    data_ratings_filtered = format_timestamp(data_ratings_filtered)
+    return data_ratings_filtered
 
-
-def data_ratings(input_rating):
-    if os.path.exists(relative_path_ratings):
-        with open(relative_path_ratings, 'r', encoding='utf-8') as file_name:
-            reader = csv.reader(file_name, delimiter=',')
-            next(reader)
-            csv_data_ratings = [row for row in reader if float(row[2]) >= input_rating]
-    return csv_data_ratings
-
-
-def get_movies_data(csv_data_ratings, input_rating):
-    list_data_movies_filtered = []
-    list_data_movies = data_management()
-    set_moveId = set([row[0] for row in csv_data_ratings])
-    #for move_id in set_moveId:
-    list_data_movies_filtered.append([dict_obj for dict_obj in list_data_movies if dict_obj['movieId'] in set_moveId])
-    for movie in list_data_movies_filtered:
-        movie[0]['release_date'] = get_release_date(movie[0]['title'])
-    return list_data_movies_filtered
-
-def get_data_formated(csv_data):
-    format_date = '%A, %B %d, %Y, %I:%M:%S %p'
-    for row in csv_data:
-        row[-1] = dt.fromtimestamp(int(row[-1]))
-        row[-1] = dt.strftime(row[-1], format_date)
-    return csv_data
-
-def get_ratings_data(input_rating=0.0):
-    csv_data = []
-    with open(relative_path_ratings, 'r') as file:
-        reader = csv.reader(file, delimiter=',')
-        next(file)
-        csv_data = [row for row in reader if float(row[2]) >= input_rating]
-    csv_data = get_data_formated(csv_data)
-    return csv_data
-
-def generate_response_search_ratings(movies_data, csv_data_ratings):
-    format_date = '%A, %B %d, %Y, %I:%M:%S %p'
-    for movie in movies_data:
-        movie[0]['ratings'] = [dict({'date_time' : str(dt.strptime(rating[-1], format_date)),
-                                      'rating': float(rating[2])}) for rating in csv_data_ratings
-                                      if movie[0]['movieId'] == rating[1]]
-    movies_data.append({'size':len(movies_data)})
-    return movies_data
+def get_release_date(data_movies):
+    for movie in data_movies:
+        try:
+            release_date = re.split(r'\((\d{4})\)', movie['title'])
+            movie['title'] = release_date[0].rstrip()
+            movie['release_date'] = release_date[1]
+        except Exception as e:
+            movie['release_date'] = 9999
+    return data_movies
 
 
-def search_by_ratings(variables):
-    rating = float(variables)
-    csv_data_ratings = []
-    movies_data = []
-    csv_data_ratings = get_ratings_data()
-    if csv_data_ratings:
-        movies_data = get_movies_data(csv_data_ratings, input_rating=rating)
-    response_data = generate_response_search_ratings(movies_data=movies_data, csv_data_ratings=csv_data_ratings)
+def get_data_movies(data_ratings):
+    data_movies = get_list_of_dictionaries('movies')
+    set_movie_id = set(movie['movieId'] for movie in data_ratings)
+    data_movies_filtered = [movie for movie in data_movies if movie['movieId'] in set_movie_id]
+    data_movies_filtered = get_release_date(data_movies_filtered)
+    return data_movies_filtered
+
+def generate_response(data_ratings, data_movies):
+    for movie in data_movies:
+        movie['ratings'] = [{'date_time' : rating['timestamp'],
+                             'rating' : rating['rating']} for rating in
+                            data_ratings if rating['movieId'] == movie['movieId']]
+    return data_movies
+
+def search_by_ratings(input_rating):
+    data_ratings_filtered_by_inputed_rating = get_data_ratings(input_rating)
+    data_movies_filtered_by_id = get_data_movies(data_ratings_filtered_by_inputed_rating)
+    result = generate_response(data_ratings_filtered_by_inputed_rating, data_movies_filtered_by_id)
+    return result
+
+
+
+#if __name__ == '__main__':
+#    search_by_ratings('3.0')
