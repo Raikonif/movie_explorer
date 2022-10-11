@@ -7,7 +7,7 @@ PATH = '../movie_files'
 
 
 def search_movie_title_typing(input_user):
-    file= get_list_of_dictionaries("movies")
+    file = get_list_of_dictionaries("movies")
     list_dict = []
     exist = False
     for dict_movie in file:
@@ -28,11 +28,18 @@ def search_movie_by_release_dates(title, release_date):
     exist = False
     for dict_movie in file:
         if title == 'all' and release_date in dict_movie['title']:
-            # print(dict_movie)
+            print(dict_movie)
             list_dict.append(dict_movie)
             exist = True
-        elif title != 'all' and release_date in dict_movie['title'] and title in dict_movie['title']:
+        elif (title != 'all' and
+              title in dict_movie['title'] and
+              release_date != 'all' and
+              release_date in dict_movie['title']):
             print(dict_movie)
+            list_dict.append(dict_movie)
+            exist = True
+        elif title != 'all' and release_date == 'all':
+            print('Movie not found')
             list_dict.append(dict_movie)
             exist = True
 
@@ -46,15 +53,31 @@ def list_movies_desc_asc(title, order, by):
     file = get_list_of_dictionaries("movies")
     # file = data_management()
     list_dict = []
-    #file = data_management('movies.csv')
+    # file = data_management('movies.csv')
     if title == 'all' and order == 'desc' and by == 'title':
         print('DESC')
         file.sort(key=lambda m: m['title'])
+        print(file)
     elif title == 'all' and order == 'asc' and by == 'title':
         print('ASC')
+        print(file)
         file.sort(key=lambda m: m['title'], reverse=True)
+    elif title != 'all' and order != 'desc' and by != 'title':
+        print('please enter a valid option')
+        return
     # for dict_movie in file:
     #     list_dict.append(dict_movie)
-        # print(dict_movie)
-        # print(dict_movie)
+    # print(dict_movie)
+    # print(dict_movie)
     return file
+
+
+if __name__ == '__main__':
+    input_user = 'Toy Story'
+    # path = '../movie_files'
+    # list_movies_desc_asc('desc')
+    # data_management()
+    # convert_to_json_file()
+    # search_movie_title_typing(input_user)
+    # search_movie_by_release_dates('Toy Story', '1995')
+    list_movies_desc_asc('sabrina', 'relative', 'time')
