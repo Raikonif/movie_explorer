@@ -5,4 +5,6 @@ __pycache__/
 movie_explorer/__pycache__
 responses/
 src/improve_fun.py
+src/saved_requests/
+src/saved_responses/
 
