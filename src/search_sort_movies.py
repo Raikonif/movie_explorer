@@ -58,12 +58,3 @@ def list_movies_desc_asc(title, order, by):
         # print(dict_movie)
         # print(dict_movie)
     return file
-
-
-if __name__ == '__main__':
-    input_user = 'Toy Story'
-    # path = '../movie_files'
-    list_movies_desc_asc('all', "desc", "title")
-    # list_movies_desc_asc('desc')
-    # data_management()
-    # convert_to_json_file()
