@@ -56,7 +56,8 @@ def create_list_of_dict_movies(list_line, list_of_dict_movies):
     list_of_dict_movies.append(dict_movie)
 
 
-def handle_open_file(concat_path, file, list_of_dict):
+def handle_open_file(concat_path, file):
+    list_of_dict = []
     with open(concat_path, 'r', encoding='utf-8') as file_name:
         if file == 'movies.csv':
             for line in file_name:
@@ -78,23 +79,22 @@ def handle_open_file(concat_path, file, list_of_dict):
 
 # this fun use the functions above search_files_csv, format_line, create_list_of_dict_movies
 def data_management(file):
-    list_of_dict = []
-    list_of_dict_movies = []
-    list_of_dict_tag = []
-    list_of_dict_rating = []
+    result_list = []
+
     concat_path = PATH + '/' + file
     if os.path.exists(concat_path) and file == 'movies.csv':
-        list_of_dict = handle_open_file(concat_path, file, list_of_dict_movies)
-        print(list_of_dict)
+        result_list = handle_open_file(concat_path, file)
+        print(result_list)
 
     elif os.path.exists(concat_path) and file == 'ratings.csv':
-        list_of_dict = handle_open_file(concat_path, file, list_of_dict_rating)
-        print(list_of_dict)
+        result_list = handle_open_file(concat_path, file)
+        print(result_list)
 
     elif os.path.exists(concat_path) and file == 'tags.csv':
-        list_of_dict = handle_open_file(concat_path, file, list_of_dict_tag)
-        print(list_of_dict)
-    return list_of_dict
+        result_list = handle_open_file(concat_path, file)
+        print(result_list)
+
+    return result_list
 
 
 def convert_to_json_file(file):
@@ -108,5 +108,5 @@ if __name__ == '__main__':
     input_user = 'Toy Story'
     # path = '../movie_files'
     # list_movies_desc_asc('desc')
-    data_management('tags.csv')
+    data_management('ratings.csv')
     # convert_to_json_file('movies.csv')
