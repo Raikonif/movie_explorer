@@ -39,7 +39,7 @@ def search_movie_by_release_dates(title, release_date):
             list_dict.append(dict_movie)
             exist = True
         elif title != 'all' and release_date == 'all':
-            print('Movie not found')
+            print(dict_movie)
             list_dict.append(dict_movie)
             exist = True
 
